@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .feedback {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #d9534f;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .footer a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Quiz</h1>
+    </header>
+
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="question">
+                <p>{{ question.question_text }}</p>
+            </div>
+
+            <!-- Display radio buttons for answer options -->
+            <div class="options">
+                <label>
+                    <input type="radio" name="answer" value="{{ question.option_a }}" {% if request.POST.answer == question.option_a %}checked{% endif %}> {{ question.option_a }}
+                </label>
+                <label>
+                    <input type="radio" name="answer" value="{{ question.option_b }}" {% if request.POST.answer == question.option_b %}checked{% endif %}> {{ question.option_b }}
+                </label>
+                <label>
+                    <input type="radio" name="answer" value="{{ question.option_c }}" {% if request.POST.answer == question.option_c %}checked{% endif %}> {{ question.option_c }}
+                </label>
+                <label>
+                    <input type="radio" name="answer" value="{{ question.option_d }}" {% if request.POST.answer == question.option_d %}checked{% endif %}> {{ question.option_d }}
+                </label>
+            </div>
+
+            <button type="submit">Submit Answer</button>
+
+            {% if show_feedback %}
+                <div class="feedback">
+                    <p>{{ feedback }}</p>
+                </div>
+            {% endif %}
+        </form>
+
+        <div class="footer">
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name="end_quiz">End Quiz</button>
+                <button type="submit" name="next_question">Next Question</button>
+                <button type="submit" name="previous_question">Previous Question</button>
+            </form>
+            <br>
+            <a href="{% url 'dashboard' %}">Go to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
