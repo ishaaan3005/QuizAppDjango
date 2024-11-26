@@ -3,7 +3,11 @@
 ## Overview
 This project is a simple quiz app built using Django, allowing users to answer multiple-choice questions and track their performance. The app has two main pages:
 1. **Dashboard Page** - Displays the user's performance.
+   ![image](https://github.com/user-attachments/assets/41d4daff-7e67-45ac-8e22-107fb23ccb3b)
+
 2. **Quiz Page** - Displays random multiple-choice questions for the user to answer.
+   ![image](https://github.com/user-attachments/assets/3ebb588f-6e3f-42c4-b613-3f1b345c62fa)
+
 
 ## Features
 - **Dashboard Page:**
